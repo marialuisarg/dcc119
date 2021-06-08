@@ -1,0 +1,1 @@
+Exercícios introdutórios de Algoritmos: aprendendo a utilizar printf, \n, %d, %f.
