@@ -1,0 +1,1 @@
+ Aula 02: variáveis, tipos de dados, comandos de I/O, atribuição e teste de mesa.
