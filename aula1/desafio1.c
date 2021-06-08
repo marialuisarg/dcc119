@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/*Imprimindo uma figura (diamante) na tela sem utilizar espaços*/
+
 int main()
 {
     printf("*1111%2d111*" , 1);
