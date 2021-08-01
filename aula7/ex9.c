@@ -10,111 +10,165 @@
  * funções implementadas na letra a.
 **/
 
-/////////////////// TERMINAR DE FAZER! /////////////////////////////
-
-
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
-
 #define TAM 500
 
-int calculaEspacos(char s1[]){
-    int espacos = 0;
-    for (int n = 0; s1[n] != '\0'; n++){ // conta o número de espaços no nome
-        if (s1[n] == ' ')
-            espacos++;
-    }
-    return espacos;
-}
-
-int ultimoEspaco(char s1[]){
-    int posicao;
-    for (int n = 0; s1[n] != '\0'; n++){ // procura último espaco e retorna índice
-        if (s1[n] == ' '){
-            posicao = n;
-        }
-    }
-    return posicao;
-}
-
 void formatoA(char s1[], char s2[]){
-    int espacos, i = 0, cont = 0;
+    int tam, contS2 = 0, iS;
+    tam = strlen(s1);
 
-    espacos = calculaEspacos(s1);
+    for (int i = tam; s1[i] != ' '; i--)
+    {
+        iS = i;
+    }
     
-    while (s1[i] != ' '){ // armazena o primeiro nome inteiro
+
+    for (int i = 0; s1[i] != ' '; i++)
+    {
         s2[i] = s1[i];
-        i++;
+        contS2++;
     }
-
-    s2[i] = ' ';
-    i++;
-    espacos--;
-    cont = i;
-
-    while(espacos > 0){ // abrevia os nomes do meio
-        if (s1[i-1] == ' '){
-            s2[cont] = s1[i];
-            cont++;
-            s2[cont] = '.';
-            cont++;
-            s2[cont] = ' ';
-            cont++;
-            espacos--;
+    
+    for (int i = contS2; i < iS-1; i++)
+    {
+        if(s1[i] == ' '){
+            s2[contS2] = ' ';
+            contS2++;
+            s2[contS2] = s1[i+1];
+            contS2++;
+            s2[contS2] = '.';
+            contS2++;
         }
-        i++;
     }
+        s2[contS2] = ' ';
+        contS2++;
 
-    for (cont = cont; s1[cont] != '\0'; cont++){
-        if (s1[cont] >= 'a' && s1[cont] <= 'z')
-            s2[cont] = s1[cont] - 'a' + 'A';
-        else
-            s2[cont] = s1[cont];
+    for (int i = iS; i < tam; i++)
+    {
+        if(s1[i] >= 'A' && s1[i] <= 'Z'){
+            s2[contS2] = s1[i];
+            contS2++;
+        }
+        
+        if(s1[i] >= 'a' && s1[i] <= 'z'){
+            s2[contS2] = s1[i] - 'a' + 'A';
+            contS2++;
+        }
     }
+    s2[contS2] = '\0';  
 
-    s2[cont] = '\0';
-
+    printf("%s\n", s2);
 }
 
 void formatoB(char s1[], char s2[]){
-    int espacos = 0, posicao, i, n = 0;
+    int iS, tam, contS2=0, j=1;
+    char aux;
 
-    posicao = ultimoEspaco(s1);
+    tam = strlen(s1);
 
-    for (i = posicao+1; s1[i] != '\0'; i++){ // armazena o último nome inteiro, em letras maiúsculas
-        if (s1[i] >= 'a' && s1[i] <= 'z')
-            s2[n] = s1[i] - 'a' + 'A';
-        else
-            s2[n] = s1[i];
-
-        n++;
+    for (int i = tam-1; s1[i] != ' '; i--)
+    {
+        if(s1[i] >= 'A' && s1[i] <= 'Z'){
+            s2[contS2] = s1[i];
+            contS2++;
+        }
+        if(s1[i] >= 'a' && s1[i] <= 'z'){
+            s2[contS2] = s1[i] - 'a' + 'A';
+            contS2++;
+        }
+        iS = i;
     }
 
-    s2[i] = ',';
-    i++;
-    s2[i] = ' ';
-    i++;
+    for (int i = 0; i < contS2/2; i++)
+    {
+        aux = s2[i];
+        s2[i] = s2[contS2-j];
+        s2[contS2-j] = aux;
 
-    for (int n = 0; n < posicao; n++){
-        s2[i] = s1[n];
-        i++;
+        j++;
     }
+
+    s2[contS2] = ',';
+    contS2++;
+    s2[contS2] = ' ';
+    contS2++; 
     
-    s2[i] = '\0';
+    for (int i = 0; i < iS-1; i++)
+    {
+        s2[contS2] = s1[i];
+        contS2++;
+    }
+    s2[contS2] = '\0';
+    printf("%s\n", s2);
+}
 
+void formatoC(char s1[], char s2[]){
+    int iS, tam, contS2=0, j=1;
+    char aux;
+
+    tam = strlen(s1);
+
+    for (int i = tam-1; s1[i] != ' '; i--)
+    {
+        if(s1[i] >= 'A' && s1[i] <= 'Z'){
+            s2[contS2] = s1[i];
+            contS2++;
+        }
+        if(s1[i] >= 'a' && s1[i] <= 'z'){
+            s2[contS2] = s1[i] - 'a' + 'A';
+            contS2++;
+        }
+        iS = i;
+    }
+
+    for (int i = 0; i < contS2/2; i++)
+    {
+        aux = s2[i];
+        s2[i] = s2[contS2-j];
+        s2[contS2-j] = aux;
+
+        j++;
+    }
+
+    s2[contS2] = ',';
+    contS2++;
+    s2[contS2] = ' ';
+    contS2++;
+    s2[contS2] = s1[0];
+    contS2++;
+    s2[contS2] = '.';
+    contS2++;
+
+    for (int i = 0; i<iS-1; i++)
+    {
+        if(s1[i+1] >= 'A' && s1[i+1] <='Z'){
+            s2[contS2] = s1[i+1];
+            contS2++;
+            s2[contS2] = '.';
+            contS2++;
+        }
+    }
+    s2[contS2] = '\0';
+    printf("%s", s2);
 }
 
 int main(){
-    char s1[TAM], s2[TAM];
+    char s1[TAM], s2[TAM], aux[TAM];
 
-    scanf("%[^\n]s ", s1);
+    scanf("%[^\n]s ",s1);
+    
+    s1[strlen(s1)] = '\0';
 
-    formatoA(s1 , s2);
-    puts(s2);
+    strcpy(aux, s2);
 
-    formatoB(s1 , s2);
-    puts(s2);
-
-    return 0;
+    formatoA(s1, s2);
+    strcpy(s2, aux);
+    
+    formatoB(s1, s2);
+    strcpy(s2, aux);
+    
+    formatoC(s1, s2);
+    
+    return 0; 
 }
